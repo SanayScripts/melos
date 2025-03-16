@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "775789560761",
+    "project_id": "melos-76768",
+    "storage_bucket": "melos-76768.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:775789560761:android:17dc106ece606dcfa72c68",
+        "android_client_info": {
+          "package_name": "com.example.melos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBonMSg5qWfdKL_OMfrLwPQnSUlbm8idIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
