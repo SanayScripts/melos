@@ -8,7 +8,7 @@ class MyTextfield extends StatelessWidget {
   const MyTextfield({
     super.key, 
     required this.controller,
-    required this,hintText,
+    required this.hintText,
     required this.obscureText 
   });
 
@@ -19,10 +19,24 @@ class MyTextfield extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         //border when unselected
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color:Theme.of(context).colorScheme.tertiary),
+          borderRadius: BorderRadius.circular(12),
+        ),
 
         //border when selected
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color:Theme.of(context).colorScheme.primary),
+          borderRadius: BorderRadius.circular(12),
+        ),
+
+        //hint text
+        hintText: hintText,
+        hintStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
+        fillColor: Theme.of(context).colorScheme.secondary,
+        filled: true,
       ),
     );
   }
-}
 
+}

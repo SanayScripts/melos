@@ -1,65 +1,22 @@
-/*
-
-LOGIN PAGE
-
-Here an existing yser can login with their email and password.
-
-Once they successfully login, they will be redirected to the home page.
-
-And if they don't have an account, they can navigate to the registration page.
-
-*/
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:melos/features/authentication/presentation/components/my_button.dart';
 import 'package:melos/features/authentication/presentation/components/my_textfield.dart';
-import 'package:melos/features/authentication/presentation/cubits/auth_cubit.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final void Function()? togglePages;
 
-  const LoginPage({super.key, required this.togglePages,});
+  const RegisterPage({super.key, required this.togglePages,});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-
-  //text controllers
+class _RegisterPageState extends State<RegisterPage> {
+ //text controllers
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
-  //login function
-  void login(){
-    //prepare email and password
-    final String email = emailController.text;
-    final String password = passwordController.text;
-
-    //auth cubit
-    final authCubit = context.read<AuthCubit>();
-
-    // ensure that email and password are not empty
-    if (email.isNotEmpty && password.isNotEmpty){
-      //login
-      authCubit.login(email, password);
-    } else {
-      //show error message
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please enter both email and password"),
-        ),
-      );
-    }
-  }
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
+  final confirmPasswordController = TextEditingController();
  
   //BUILD UI
   @override
@@ -83,9 +40,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
             
               const SizedBox(height: 50),
-              //welcome back mshg
+              // create acc message
               Text(
-                "Welcome back, you've been missed!",
+                "Join Melos, find your tune",
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
                   fontSize: 16,
@@ -95,6 +52,14 @@ class _LoginPageState extends State<LoginPage> {
             
               const SizedBox(height: 25),
             
+                MyTextfield(
+                controller: nameController,
+                hintText: "Name", 
+                obscureText: false,
+                ),
+                
+              const SizedBox(height: 25),
+
               //email textfield
               MyTextfield(
                 controller: emailController,
@@ -103,30 +68,39 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 
               const SizedBox(height: 25),
+
               //password textfield
               MyTextfield(
-                controller: emailController,
+                controller: passwordController,
                 hintText: "Password", 
                 obscureText: true,
                 ),
 
+              const SizedBox(height: 25),
+
+              //confirm password textfield
+              MyTextfield(
+                controller: confirmPasswordController,
+                hintText: "Confirm Password", 
+                obscureText: true,
+                ),
               const SizedBox(height: 25.0),
 
-              //login button
+              // Register Button
               MyButton(
                 onTap: () {},
-                text: "Login",
+                text: "Register",
               ),
 
               const SizedBox(height: 25.0),
 
 
-              //register now page ko jaane ka button
+              //login now page ko jaane ka button
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Not a member?",
+                    "Already a member?",
                     style: 
                     TextStyle(color: Theme.of(context).colorScheme.primary),
                   ),
@@ -134,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                   GestureDetector(
                     onTap: widget.togglePages, 
                     child: Text(
-                      " Register now",
+                      " Login now",
                       style: 
                       TextStyle(color: Theme.of(context).colorScheme.inversePrimary,
                       fontWeight: FontWeight.bold,
